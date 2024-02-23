@@ -1,9 +1,11 @@
 import { HubHttpUrlOptions } from "frames.js"
 
+const NEXT_PUBLIC_VERCEL_URL =
+  process.env["NEXT_PUBLIC_VERCEL_URL"] &&
+  `https://${process.env["NEXT_PUBLIC_VERCEL_URL"]}`
+
 export const APP_BASE_URL =
-  process.env["NEXT_PUBLIC_HOST"] ||
-  process.env["VERCEL_URL"] ||
-  "http://localhost:3000"
+  process.env["NEXT_PUBLIC_HOST"] || NEXT_PUBLIC_VERCEL_URL || "localhost:3000"
 
 // See https://neynar.com/
 const NEYNAR_HUB_OPTIONS = {

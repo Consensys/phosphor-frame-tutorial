@@ -93,7 +93,7 @@ export default async function Home({
   return (
     <div>
       <FrameContainer
-        pathname={listingUrl}
+        pathname={`${listingUrl}`}
         postUrl={`${listingUrl}/frames`}
         state={state}
         previousFrame={previousFrame}
@@ -108,7 +108,7 @@ export default async function Home({
       <b>Mint with Phosphor example</b>
       <p>
         You can check this page on the{" "}
-        <Link href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}>
+        <Link href={`/debug?url=${APP_BASE_URL}${listingUrl}`}>
           frames.js debugger
         </Link>
         {APP_BASE_URL.includes("localhost") && (
@@ -116,7 +116,7 @@ export default async function Home({
             {" "}
             or on the{" "}
             <a
-              href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}/${listingUrl}`}
+              href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
             >
               Warpcast Frame validator
             </a>
