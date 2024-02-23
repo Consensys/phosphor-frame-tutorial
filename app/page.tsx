@@ -1,5 +1,6 @@
 "use client"
 
+import { GithubCorner } from "./components/GithubCorner"
 import { APP_BASE_URL } from "./constants"
 import { useState } from "react"
 
@@ -14,6 +15,7 @@ export default function Home() {
   // use tailwind class for styling elements
   return (
     <div>
+      <GithubCorner repository="Consensys/phosphor-frame-tutorial" />
       <h1 className="text-3xl font-bold mb-4">
         Phosphor x Farcaster Frames example
       </h1>
