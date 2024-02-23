@@ -1,6 +1,9 @@
 import { HubHttpUrlOptions } from "frames.js"
 
-export const APP_BASE_URL = process.env["NEXT_PUBLIC_HOST"] || "http://localhost:3000"
+export const APP_BASE_URL =
+  process.env["NEXT_PUBLIC_HOST"] ||
+  process.env["VERCEL_URL"] ||
+  "http://localhost:3000"
 
 // See https://neynar.com/
 const NEYNAR_HUB_OPTIONS = {
@@ -33,4 +36,7 @@ const DEBUG_HUB_OPTIONS = {
 export const FALLBACK_HUB_OPTIONS = PINATA_HUB_OPTIONS
 // export const FALLBACK_HUB_OPTIONS = NEYNAR_HUB_OPTIONS
 
-export const HUB_OPTIONS = process.env.NODE_ENV === "development" ? DEBUG_HUB_OPTIONS : FALLBACK_HUB_OPTIONS
+export const HUB_OPTIONS =
+  process.env.NODE_ENV === "development"
+    ? DEBUG_HUB_OPTIONS
+    : FALLBACK_HUB_OPTIONS
