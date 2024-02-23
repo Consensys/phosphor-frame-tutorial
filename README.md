@@ -2,6 +2,10 @@
 
 Based on the [Frames.js Starter Kit](https://github.com/framesjs/frames.js/tree/main/examples/framesjs-starter), a repo to get started quickly with `frames.js`.
 
+## Requisites
+
+- Node version >=18.17.0
+
 ## Quickstart
 
 1. Install dependencies `npm install`
