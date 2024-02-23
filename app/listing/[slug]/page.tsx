@@ -111,7 +111,7 @@ export default async function Home({
         <Link href={`/debug?url=${APP_BASE_URL}${listingUrl}`}>
           frames.js debugger
         </Link>
-        {APP_BASE_URL.includes("localhost") && (
+        {!APP_BASE_URL.includes("localhost") && (
           <>
             {" "}
             or on the{" "}

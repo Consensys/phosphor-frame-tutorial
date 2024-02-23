@@ -1,3 +1,4 @@
+// Based on https://github.com/tholman/github-corners
 export function GithubCorner(props: { repository: string} ) {
   return (
     <a
