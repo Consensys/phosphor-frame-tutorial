@@ -6,7 +6,7 @@ Based on the [Frames.js Starter Kit](https://github.com/framesjs/frames.js/tree/
 
 1. Install dependencies `npm install`
 
-2. Run the dev server `npm dev`
+2. Run the dev server `npm run dev`
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser.
 
