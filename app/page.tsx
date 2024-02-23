@@ -9,7 +9,7 @@ export default function Home() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    window.location.href = `${APP_BASE_URL}/${listingId}`
+    window.location.href = `${APP_BASE_URL}/listing/${listingId}`
   }
 
   // use tailwind class for styling elements

@@ -9,7 +9,7 @@ import {
   getFrameMessage,
 } from "frames.js/next/server"
 import Link from "next/link"
-import { APP_BASE_URL, HUB_OPTIONS } from "../constants"
+import { APP_BASE_URL, HUB_OPTIONS } from "../../constants"
 
 const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
 const PHOSPHOR_PAYMENT_PROVIDER = "BETA_FREE_MINT" // TODO: This will change to ORGANIZATION before publishing when a new listing is created
@@ -88,12 +88,13 @@ export default async function Home({
   }
 
   const { imageUrl, title, collectionName } = await getItemData(listing)
+  const listingUrl = `/listing/${listingId}`
 
   return (
     <div>
       <FrameContainer
-        pathname={`/${listingId}`}
-        postUrl={`/${listingId}/frames`}
+        pathname={listingUrl}
+        postUrl={`${listingUrl}/frames`}
         state={state}
         previousFrame={previousFrame}
       >
@@ -107,18 +108,19 @@ export default async function Home({
       <b>Mint with Phosphor example</b>
       <p>
         You can check this page on the{" "}
-        <Link href={`/debug?url=${APP_BASE_URL}/${listingId}`}>
+        <Link href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}>
           frames.js debugger
         </Link>
         {APP_BASE_URL.includes("localhost") && (
           <>
-            {" "}or on the{" "}
+            {" "}
+            or on the{" "}
             <a
-              href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}/${listingId}`}
+              href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}/${listingUrl}`}
             >
               Warpcast Frame validator
             </a>
-            , or share the URL on Farcaster! 
+            , or share the URL on Farcaster!
           </>
         )}
       </p>
