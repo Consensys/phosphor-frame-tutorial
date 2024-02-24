@@ -9,6 +9,7 @@ import {
   getFrameMessage,
 } from "frames.js/next/server"
 import Link from "next/link"
+import Image from "next/image"
 import { APP_BASE_URL, HUB_OPTIONS } from "../../constants"
 
 const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
@@ -99,51 +100,87 @@ export default async function Home({
 
   // Step 7: Render the frame
   const listingUrl = `/listing/${listingId}`
+  const isLocalhost = APP_BASE_URL.includes("localhost")
   return (
-    <div className="bg-violet-900 flex items-center justify-center h-screen w-screen">
-      <div style={{ maxWidth: "700px" }} className="text-center">
-        <FrameContainer
-          pathname={`${listingUrl}`}
-          postUrl={`${listingUrl}/frames`}
-          state={state}
-          previousFrame={previousFrame}
-        >
-          <FrameImage src={imageUrl} />
-          <FrameButton>
-            {errorMessage ||
-              `Like cast to mint "${title}" from ${collectionName}
+    <>
+      {/* These elements will generate the Frame meta-tags */}
+      <FrameContainer
+        pathname={`${listingUrl}`}
+        postUrl={`${listingUrl}/frames`}
+        state={state}
+        previousFrame={previousFrame}
+      >
+        <FrameImage src={imageUrl} />
+        <FrameButton>
+          {errorMessage ||
+            `Like cast to mint "${title}" from ${collectionName}
             (${listing.quantity_remaining} / ${listing.quantity_listed})`}
-          </FrameButton>
-        </FrameContainer>
-        <h1 className="text-3xl mb-4 font-bold text-slate-100">
-          Mint with Phosphor example frame
-        </h1>
-        <div className="text-center text-slate-200">
-          <p>
-            You can check this page on the{" "}
-            <Link
-              href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}
-              className="text-slate-200 underline"
-            >
-              frames.js debugger
-            </Link>
-            {!APP_BASE_URL.includes("localhost") && (
-              <>
-                {" "}
-                or on the{" "}
-                <a
-                  href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
-                  className="text-slate-200 underline"
-                >
-                  Warpcast Frame validator
-                </a>
-                , or share the URL on Farcaster!
-              </>
-            )}
-          </p>
+        </FrameButton>
+      </FrameContainer>
+
+      {/* This is the content visible to browser users */}
+      <div className="bg-violet-900 text-slate-100 flex items-center justify-center h-screen w-screen">
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
+            <h1 className="col-span-1 md:col-span-7 text-center text-2xl md:text-3xl font-semibold mb-3">
+              Mint with Phosphor in a Frame
+            </h1>
+            <div className="col-start-1 md:col-start-2 col-span-1 md:col-span-3 row-start-2 row-span-1 md:row-span-3">
+              <Image
+                src={imageUrl}
+                alt="Placeholder Image"
+                width={600}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="col-start-1 md:col-start-5 col-span-1 md:col-span-2 row-start-4 md:row-start-2 bg-violet-950 shadow-md rounded p-4 mb-4">
+              <h2 className="text-2xl font-bold">{title}</h2>
+              <p className="text-xl">
+                from <b>{collectionName}</b>
+              </p>
+              <p className="text-ml">
+                ({listing.quantity_remaining} of {listing.quantity_listed}{" "}
+                remaining)
+              </p>
+            </div>
+            <div className="col-start-1 md:col-start-5 col-span-1 md:col-span-2 row-start-5 md:row-start-3 ml-1">
+              <h3 className="font-semibold">Now you can:</h3>
+              <ul className="list-disc list-inside">
+                {!isLocalhost && (
+                  <li>Share the current page URL on Farcaster!</li>
+                )}
+                <li>
+                  Check on{" "}
+                  <Link
+                    href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}
+                    className="text-slate-200 underline"
+                  >
+                    frames.js debugger
+                  </Link>
+                </li>
+                {!isLocalhost && (
+                  <li>
+                    Check on{" "}
+                    <a
+                      href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
+                      className="text-slate-200 underline"
+                    >
+                      Warpcast Frame validator
+                    </a>
+                  </li>
+                )}
+              </ul>
+              {isLocalhost && (
+                <p className="mt-5">
+                  Deploy to a public host to see more options.
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

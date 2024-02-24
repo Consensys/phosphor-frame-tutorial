@@ -5,7 +5,9 @@ import { APP_BASE_URL } from "./constants"
 import { useState } from "react"
 
 export default function Home() {
-  const [listingId, setListingId] = useState("")
+  // Defaulting to our example listing for the tutorial
+  // TODO: Replace with the definitive tutorial gift listing
+  const [listingId, setListingId] = useState("a414b244-9174-4ab5-9ac5-f366b9d48307")
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -31,7 +33,7 @@ export default function Home() {
             <input
               type="text"
               id="listing_id"
-              placeholder="TODO: reward listing id"
+              placeholder="UUID"
               className="bg-slate-200 shadow appearance-none border rounded w-full py-2 px-3 text-slate-800 leading-tight focus:outline-none focus:shadow-outline placeholder:text-slate-400"
               required
               value={listingId}
