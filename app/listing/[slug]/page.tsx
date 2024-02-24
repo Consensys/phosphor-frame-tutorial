@@ -100,39 +100,49 @@ export default async function Home({
   // Step 7: Render the frame
   const listingUrl = `/listing/${listingId}`
   return (
-    <div>
-      <FrameContainer
-        pathname={`${listingUrl}`}
-        postUrl={`${listingUrl}/frames`}
-        state={state}
-        previousFrame={previousFrame}
-      >
-        <FrameImage src={imageUrl} />
-        <FrameButton>
-          {errorMessage ||
-            `Like cast to mint "${title}" from ${collectionName}
+    <div className="bg-violet-900 flex items-center justify-center h-screen w-screen">
+      <div style={{ maxWidth: "700px" }} className="text-center">
+        <FrameContainer
+          pathname={`${listingUrl}`}
+          postUrl={`${listingUrl}/frames`}
+          state={state}
+          previousFrame={previousFrame}
+        >
+          <FrameImage src={imageUrl} />
+          <FrameButton>
+            {errorMessage ||
+              `Like cast to mint "${title}" from ${collectionName}
             (${listing.quantity_remaining} / ${listing.quantity_listed})`}
-        </FrameButton>
-      </FrameContainer>
-      <b>Mint with Phosphor example</b>
-      <p>
-        You can check this page on the{" "}
-        <Link href={`/debug?url=${APP_BASE_URL}${listingUrl}`}>
-          frames.js debugger
-        </Link>
-        {!APP_BASE_URL.includes("localhost") && (
-          <>
-            {" "}
-            or on the{" "}
-            <a
-              href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
+          </FrameButton>
+        </FrameContainer>
+        <h1 className="text-3xl mb-4 font-bold text-slate-100">
+          Mint with Phosphor example frame
+        </h1>
+        <div className="text-center text-slate-200">
+          <p>
+            You can check this page on the{" "}
+            <Link
+              href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}
+              className="text-slate-200 underline"
             >
-              Warpcast Frame validator
-            </a>
-            , or share the URL on Farcaster!
-          </>
-        )}
-      </p>
+              frames.js debugger
+            </Link>
+            {!APP_BASE_URL.includes("localhost") && (
+              <>
+                {" "}
+                or on the{" "}
+                <a
+                  href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
+                  className="text-slate-200 underline"
+                >
+                  Warpcast Frame validator
+                </a>
+                , or share the URL on Farcaster!
+              </>
+            )}
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
