@@ -11,6 +11,7 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import { APP_BASE_URL, HUB_OPTIONS } from "../../constants"
+import { GithubCorner } from "../../components/GithubCorner"
 
 const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
 const PHOSPHOR_PAYMENT_PROVIDER = "BETA_FREE_MINT" // TODO: This will change to ORGANIZATION before publishing when a new listing is created
@@ -119,6 +120,7 @@ export default async function Home({
       </FrameContainer>
 
       {/* This is the content visible to browser users */}
+      <GithubCorner repository="Consensys/phosphor-frame-tutorial" />
       <div className="bg-violet-900 text-slate-100 flex items-center justify-center h-screen w-screen">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
