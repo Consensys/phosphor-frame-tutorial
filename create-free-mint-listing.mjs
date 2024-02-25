@@ -81,7 +81,7 @@ const lock = await postPhosphorAdminApi("/items/lock", {
 // API doc: https://docs.phosphor.xyz/latest-admin-api#tag/Listing/paths/~1v1~1listings/post
 // Learn more on listings: https://docs.phosphor.xyz/platform-features/digital-asset-distribution/listings/
 const listing = await postPhosphorAdminApi("/listings", {
-    "collection_id": collection.id,
+    "item_id": item.id,
     "quantity_listed": QUANTITY_LISTED,
     "price": "0",
     "currency": "ETH",
