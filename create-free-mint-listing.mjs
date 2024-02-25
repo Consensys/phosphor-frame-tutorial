@@ -1,9 +1,7 @@
 
-const ADMIN_API_BASE_URL = "https://admin-api.phosphor.xyz/v1"
 const PHOSPHOR_API_KEY = process.env.PHOSPHOR_API_KEY // Get your API key from https://www.phosphor.xyz/developer
-const OWNER_WALLET_ADDRESS = process.env.OWNER_WALLET_ADDRESS
-
-const NETWORK_ID = 59144 // Linea
+const ADMIN_API_BASE_URL = "https://admin-api.dev.phosphor.xyz/v1"
+const NETWORK_ID = 59144 // Linea // TODO: confirm
 const NFT_CONTRACT_SYMBOL = "PHxFF"
 const COLLECTION_NAME = "Phosphor x Frames Tutorial"
 const COLLECTION_DESCRIPTION = ""
@@ -23,17 +21,13 @@ let id = 0
 const collection = await postPhosphorAdminApi("/collections", {
     "name": COLLECTION_NAME,
     "description": COLLECTION_DESCRIPTION,
-    "media": {
-        "thumbnail_image_url": "https://nftprodstorage.blob.core.windows.net/public/Qma6CMuBBrfxpwfadSDhJS2nGinZWrFjseJRSs5Rqm59nE/phosphor-collection-logo-2.png"
-    },
+    "image_url": "https://nftprodstorage.blob.core.windows.net/public/Qma6CMuBBrfxpwfadSDhJS2nGinZWrFjseJRSs5Rqm59nE/phosphor-collection-logo-2.png",
     "deployment_request": {
         "network_id": NETWORK_ID,
         "type": "PLATFORM",
-        "token_id_assignment_strategy": "AUTOMATIC",
         "platform": {
             "variant": "FlexibleERC1155",
             "symbol": NFT_CONTRACT_SYMBOL,
-            "owner": OWNER_WALLET_ADDRESS
         }
     }
 })
@@ -65,17 +59,12 @@ const listing = await postPhosphorAdminApi("/listings", {
     "quantity_listed": QUANTITY_LISTED,
     "price": "0",
     "currency": "ETH",
-    // TODO: remove?
-    // "settlement_currency": {
-    //     "MINT_VOUCHER": "ETH"
-    // },
     "payment_providers": [
         "ORGANIZATION"
     ],
     "max_quantity_per_tx": 1,
     "policy": {
         "max_per_user": MAX_PER_USER,
-        // "tx_payer": "BUYER" // TODO: remove?
     }
 })
 
@@ -102,11 +91,6 @@ async function fetchJson(url, init = {}) {
     console.log()
     console.log(init.method || "GET", url, init.body)
 
-    // TODO: remove
-    // const parsed= { url, id: ++id }
-    // console.log('RESPONSE', parsed)
-    // return parsed
-
     const response = await fetch(url, init)
     if (response.status >= 400) {
         console.error(`Error: ${response.status} ${response.statusText}`)
@@ -123,3 +107,11 @@ async function fetchJson(url, init = {}) {
         throw e
     }
 }
+
+// TODO: remove
+// async function fetch(url) {
+//     return {
+//         status: 200,
+//         text: async () => JSON.stringify({ url, id: ++id })
+//     }
+// }
