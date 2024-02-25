@@ -147,23 +147,23 @@ export default async function Home({
               </p>
             </div>
             <div className="col-start-1 md:col-start-5 col-span-1 md:col-span-2 row-start-5 md:row-start-3 ml-1">
-              <h3 className="font-semibold">Now you can:</h3>
-              <ul className="list-disc list-inside">
+              <h3 className="">This page contains Farcaster Frame <span className="font-mono text-violet-400 ">&lt;meta&gt;</span> tags, so now you can:</h3>
+              <ul className="list-disc list-inside text-violet-200">
                 {!isLocalhost && (
                   <li>Share the current page URL on Farcaster!</li>
                 )}
                 <li>
-                  Check on{" "}
+                  Check it out on{" "}
                   <Link
                     href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}
                     className="text-slate-200 underline"
                   >
-                    frames.js debugger
+                    Frames.js debugger
                   </Link>
                 </li>
                 {!isLocalhost && (
                   <li>
-                    Check on{" "}
+                    Check it out on{" "}
                     <a
                       href={`https://warpcast.com/~/developers/frames?url=${APP_BASE_URL}${listingUrl}`}
                       className="text-slate-200 underline"
