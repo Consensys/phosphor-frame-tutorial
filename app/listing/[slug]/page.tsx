@@ -13,8 +13,7 @@ import Image from "next/image"
 import { APP_BASE_URL, HUB_OPTIONS } from "../../constants"
 import { GithubCorner } from "../../components/GithubCorner"
 
-// const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
-const PHOSPHOR_API_BASE_URL = "https://public-api.dev.phosphor.xyz/v1" // TODO: change to production
+const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
 
 // This is how frames.js helps you handle state across frames.
 // However, for this example we are not using it.
@@ -32,12 +31,13 @@ export default async function Home({
   params,
   searchParams,
 }: NextServerPageProps) {
-  // Step 1: Get the frame message and validate it
+
+  /* Step 1: Get the frame message and validate it */
   const previousFrame = getPreviousFrame<State>(searchParams)
   let listingId = params.slug
   const [state] = useFramesReducer<State>(reducer, initialState, previousFrame)
 
-  // Remember, the first frame in frameMessage is undefined.
+  // Keep in mind that frameMessage is undefined on the first frame
   const frameMessage = await getFrameMessage(previousFrame.postBody, {
     ...HUB_OPTIONS,
   })
@@ -48,31 +48,31 @@ export default async function Home({
     throw new Error("Invalid frame payload")
   }
 
-  // Step 2: Get the user address
+  /* Step 2: Get the user address */
   // We are simply using the first verified address, if available,
   // and defaulting to the custody address.
   // The custody address is reliably accessible, but the verified
   // address is more user-friendly.
   //
-  // At the first frame, frameMessage is undefined, so userAddress will be undefined too.
+  // On the first frame, frameMessage is undefined, so userAddress will be undefined too.
   const userAddress: string | undefined =
     frameMessage?.requesterVerifiedAddresses?.[0] ||
     frameMessage?.requesterCustodyAddress
 
-  // Step 3: Get the listing data and validate it
+  /* Step 3: Get the listing data and validate it */
   // API doc: https://docs.phosphor.xyz/latest-public-api#/paths/~1v1~1listings~1%7Blisting_id%7D/get
   // Learn more on listings: https://docs.phosphor.xyz/platform-features/digital-asset-distribution/listings/
   const listing = await requestPhosphorApi(`/listings/${listingId}`)
 
   let errorMessage = await validateListing(listing, userAddress)
 
-  // Step 4: Add other checks
+  /* Step 4: Add other checks */
   // Check if the user has liked the cast.
   if (!errorMessage && frameMessage?.likedCast === false) {
     errorMessage = "Mmmh... maybe if you like it first? Try again"
   }
 
-  // Step 5: Create a purchase intent
+  /* Step 5: Create a purchase intent */
   if (!errorMessage && userAddress) {
     // API doc: https://docs.phosphor.xyz/latest-public-api#/paths/~1v1~1purchase-intents/post
     // Learn more on purchase intents: https://docs.phosphor.xyz/platform-features/digital-asset-distribution/listings/purchase-intents
@@ -96,10 +96,11 @@ export default async function Home({
     }
   }
 
-  // Step 6: Get the item data
+  /* Step 6: Get the item data */
   const { imageUrl, title, collectionName } = await getItemData(listing)
 
-  // Step 7: Render the frame
+
+  /* Step 7: Render the frame */
   const listingUrl = `/listing/${listingId}`
   const isLocalhost = APP_BASE_URL.includes("localhost")
   return (
