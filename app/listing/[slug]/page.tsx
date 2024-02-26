@@ -13,8 +13,8 @@ import Image from "next/image"
 import { APP_BASE_URL, HUB_OPTIONS } from "../../constants"
 import { GithubCorner } from "../../components/GithubCorner"
 
-const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
-const PHOSPHOR_PAYMENT_PROVIDER = "BETA_FREE_MINT" // TODO: This will change to ORGANIZATION before publishing when a new listing is created
+// const PHOSPHOR_API_BASE_URL = "https://public-api.phosphor.xyz/v1"
+const PHOSPHOR_API_BASE_URL = "https://public-api.dev.phosphor.xyz/v1" // TODO: change to production
 
 // This is how frames.js helps you handle state across frames.
 // However, for this example we are not using it.
@@ -79,7 +79,7 @@ export default async function Home({
     const purchaseIntent = await requestPhosphorApi("/purchase-intents", {
       method: "POST",
       body: JSON.stringify({
-        provider: PHOSPHOR_PAYMENT_PROVIDER,
+        provider: "ORGANIZATION",
         listing_id: listing.id,
         quantity: 1,
         buyer: { eth_address: userAddress },
@@ -155,7 +155,7 @@ export default async function Home({
                 <li>
                   Check it out on{" "}
                   <Link
-                    href={`/debug?url=${APP_BASE_URL}/${listingUrl}`}
+                    href={`/debug?url=${APP_BASE_URL}${listingUrl}`}
                     className="text-slate-200 underline"
                   >
                     Frames.js debugger
@@ -216,7 +216,7 @@ async function validateListing(listing: any, address: any) {
   if (!listing || listing.error) {
     return "Listing not found"
   }
-  if (!listing.payment_providers.includes(PHOSPHOR_PAYMENT_PROVIDER)) {
+  if (!listing.payment_providers.includes("ORGANIZATION")) {
     return "Invalid listing"
   }
   if (listing.quantity_remaining === 0) {

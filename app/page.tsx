@@ -4,10 +4,14 @@ import { GithubCorner } from "./components/GithubCorner"
 import { APP_BASE_URL } from "./constants"
 import { useState } from "react"
 
+// Defaulting to our example listing for the tutorial
+// TODO: Replace with the definitive tutorial gift listing
+const DEFAULT_LISTING_ID = "bb736890-cba9-4c91-a580-8221965394e9"
+// const DEFAULT_LISTING_ID = "a414b244-9174-4ab5-9ac5-f366b9d48307"
+
+
 export default function Home() {
-  // Defaulting to our example listing for the tutorial
-  // TODO: Replace with the definitive tutorial gift listing
-  const [listingId, setListingId] = useState("a414b244-9174-4ab5-9ac5-f366b9d48307")
+  const [listingId, setListingId] = useState(DEFAULT_LISTING_ID)
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
