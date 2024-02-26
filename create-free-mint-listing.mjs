@@ -1,15 +1,18 @@
 
 const PHOSPHOR_API_KEY = process.env.PHOSPHOR_API_KEY // Get your API key from https://www.phosphor.xyz/developer
-const ADMIN_API_BASE_URL = "https://admin-api.phosphor.xyz/v1"
+const PHOSPHOR_ADMIN_API_BASE_URL = "https://admin-api.phosphor.xyz/v1"
 const NETWORK_ID = 59144 // Linea
 // const NETWORK_ID = 59140 // Linea Testnet
-// const NETWORK_ID = 80001 // Polygon Testnet
-const NFT_CONTRACT_SYMBOL = "P+F"
+const NFT_CONTRACT_SYMBOL = "POGS"
 const COLLECTION_NAME = "Phosphor OGs Hall of Fame"
-const COLLECTION_DESCRIPTION = ""
-const ITEM_TITLE = "Phosphor API x Farcaster Frames Tutorial OG Reader"
-const ITEM_DESCRIPTION = "" // TODO: copy text
-const ITEM_URL = "https://phosphor-frame-tutorial.vercel.app/PhosphorPlusFrames.png"
+const COLLECTION_DESCRIPTION = "This collection celebrates the pioneers and legends of the Phosphor community. Each token stands as a digital homage to the individuals who have shaped Phosphor's history."
+const COLLECTION_IMAGE_URL = "https://phosphor-frame-tutorial.vercel.app/PhosphorOGsHallOfFame.jpeg"
+const ITEM_TITLE = "Phosphor API x Frames OG Reader"
+const ITEM_DESCRIPTION = "OG Reader of the Phosphor API x Farcaster Frames Tutorial."
+const ITEM_IMAGE_URL = "https://phosphor-frame-tutorial.vercel.app/PhosphorPlusFrames.png"
+const ITEM_ATTRIBUTES = {
+    "repository_url": "https://github.com/Consensys/phosphor-frame-tutorial",
+}
 const QUANTITY_LISTED = 100
 const MAX_PER_USER = 1
 
@@ -20,7 +23,7 @@ const MAX_PER_USER = 1
 const collection = await postPhosphorAdminApi("/collections", {
     "name": COLLECTION_NAME,
     "description": COLLECTION_DESCRIPTION,
-    "image_url": "https://nftprodstorage.blob.core.windows.net/public/Qma6CMuBBrfxpwfadSDhJS2nGinZWrFjseJRSs5Rqm59nE/phosphor-collection-logo-2.png",
+    "image_url": COLLECTION_IMAGE_URL,
     "deployment_request": {
         "network_id": NETWORK_ID,
         "type": "PLATFORM",  // Learn more on platform contracts: https://docs.phosphor.xyz/platform-features/digital-asset-creation/collections/collection-contract/platform-contract
@@ -55,7 +58,8 @@ const item = await postPhosphorAdminApi("/items", {
     "attributes": {
         "title": ITEM_TITLE,
         "description": ITEM_DESCRIPTION,
-        "image_url": ITEM_URL
+        "image_url": ITEM_IMAGE_URL,
+        ...ITEM_ATTRIBUTES
     }
 })
 
@@ -95,7 +99,7 @@ async function postPhosphorAdminApi(url, body) {
 }
 
 async function requestPhosphorAdminApi(url, init = {}) {
-    return await fetchJson(`${ADMIN_API_BASE_URL}${url}`, init)
+    return await fetchJson(`${PHOSPHOR_ADMIN_API_BASE_URL}${url}`, init)
 }
 
 async function fetchJson(url, init = {}) {
