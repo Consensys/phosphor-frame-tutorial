@@ -216,6 +216,7 @@ async function getItemData(listing: any) {
   return { imageUrl, title, collectionName }
 }
 
+// Validates the listing and the user's eligibility to mint
 async function validateListing(listing: any, address: any) {
   if (!listing || listing.error) {
     return "Listing not found"
@@ -244,6 +245,7 @@ async function validateListing(listing: any, address: any) {
   }
 }
 
+// Helper functions to make requests to the Phosphor API
 async function requestPhosphorApi(url: string, init: RequestInit = {}) {
   return await fetchJson(`${PHOSPHOR_API_BASE_URL}${url}`, init)
 }
