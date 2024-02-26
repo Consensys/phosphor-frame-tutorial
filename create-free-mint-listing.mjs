@@ -1,21 +1,17 @@
 
 const PHOSPHOR_API_KEY = process.env.PHOSPHOR_API_KEY // Get your API key from https://www.phosphor.xyz/developer
-const ADMIN_API_BASE_URL = "https://admin-api.dev.phosphor.xyz/v1"
-// const NETWORK_ID = 59144 // Linea // TODO: confirm
+const ADMIN_API_BASE_URL = "https://admin-api.phosphor.xyz/v1"
+const NETWORK_ID = 59144 // Linea
 // const NETWORK_ID = 59140 // Linea Testnet
-const NETWORK_ID = 80001 // Polygon Testnet
-const NFT_CONTRACT_SYMBOL = "PHxFF"
-const COLLECTION_NAME = "Phosphor x Frames Tutorial 2"
+// const NETWORK_ID = 80001 // Polygon Testnet
+const NFT_CONTRACT_SYMBOL = "P+F"
+const COLLECTION_NAME = "Phosphor OGs Hall of Fame"
 const COLLECTION_DESCRIPTION = ""
-const ITEM_TITLE = "Phosphor API x Farcaster Frames Tutorial Memento"
-const ITEM_DESCRIPTION = ""
-// TODO: replace with new image
-const ITEM_URL = "https://nftprodstorage.blob.core.windows.net/public/QmWJVNmDjj32PPvWyBNRrvT4MEhbEpX1vzsoctteRRcnsq/phosphor-nft-badge-1.png"
-const QUANTITY_LISTED = 100 // TODO: confirm
+const ITEM_TITLE = "Phosphor API x Farcaster Frames Tutorial OG Reader"
+const ITEM_DESCRIPTION = "" // TODO: copy text
+const ITEM_URL = "https://phosphor-frame-tutorial.vercel.app/PhosphorPlusFrames.png"
+const QUANTITY_LISTED = 100
 const MAX_PER_USER = 1
-
-// TODO: remove
-let id = 0
 
 /* Create a collection and deploy contract */
 // API doc: https://docs.phosphor.xyz/latest-admin-api#tag/Collection/paths/~1v1~1collections/post
@@ -35,14 +31,6 @@ const collection = await postPhosphorAdminApi("/collections", {
     }
 })
 
-// TODO: remove
-// const collection = {
-//     "id": "8f8b2e93-3c79-4290-a49e-121d9a558f08",
-//     "deployment": {
-//         "transaction_id": 'cad8f6e8-5ed9-46c2-8d4d-87c86707fea0'
-//     }
-// }
-
 /* Wait for contract deployment */
 while (true) {
     // API doc: https://docs.phosphor.xyz/latest-admin-api#tag/Collection/paths/~1v1~1collections~1%7Bcollection_id%7D~1deployment-request/get
@@ -55,6 +43,7 @@ while (true) {
         const transaction = await requestPhosphorAdminApi(`/transactions/${deploymentRequest.transaction_id}`)
         process.exit(1)
     }
+
     await new Promise(resolve => setTimeout(resolve, 5000))
 }
 
@@ -134,11 +123,3 @@ async function fetchJson(url, init = {}) {
         throw e
     }
 }
-
-// TODO: remove
-// async function fetch(url) {
-//     return {
-//         status: 200,
-//         text: async () => JSON.stringify({ url, id: ++id })
-//     }
-// }
