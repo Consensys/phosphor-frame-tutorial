@@ -111,11 +111,10 @@ export default async function Home({
         state={state}
         previousFrame={previousFrame}
       >
-        <FrameImage src={imageUrl} />
+        <FrameImage src={imageUrl} aspectRatio="1:1" />
         <FrameButton>
           {errorMessage ||
-            `Like cast to mint "${title}" from ${collectionName}
-            (${listing.quantity_remaining} / ${listing.quantity_listed})`}
+            `Like cast to mint "${title}" (${listing.quantity_remaining}/${listing.quantity_listed})`}
         </FrameButton>
       </FrameContainer>
 
@@ -147,7 +146,11 @@ export default async function Home({
               </p>
             </div>
             <div className="col-start-1 md:col-start-5 col-span-1 md:col-span-2 row-start-5 md:row-start-3 ml-1">
-              <h3 className="">This page contains Farcaster Frame <span className="font-mono text-violet-400 ">&lt;meta&gt;</span> tags, so now you can:</h3>
+              <h3>
+                This page contains Farcaster Frame{" "}
+                <span className="font-mono text-violet-400 ">&lt;meta&gt;</span>{" "}
+                tags, so now you can:
+              </h3>
               <ul className="list-disc list-inside text-violet-200">
                 {!isLocalhost && (
                   <li>Share the current page URL on Farcaster!</li>
