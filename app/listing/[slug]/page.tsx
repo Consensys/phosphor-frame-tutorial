@@ -48,11 +48,11 @@ export default async function Home({
     throw new Error("Invalid frame payload")
   }
 
-  /* Step 2: Get the user address */
+  /* Step 2: Get the recipient's address */
   // We are simply using the first verified address, if available,
   // and defaulting to the custody address.
-  // The custody address is reliably accessible, but the verified
-  // address is more user-friendly.
+  // We can count on the custody address being always available,
+  // but the verified address is more user-friendly.
   //
   // On the first frame, frameMessage is undefined, so userAddress will be undefined too.
   const userAddress: string | undefined =
@@ -92,7 +92,7 @@ export default async function Home({
     } else {
       console.log({ purchaseIntent })
       errorMessage =
-        "Your item has been minted successfully. It could take up a few minutes to arrive..."
+        "Your item has been minted. It could take a while to arrive..."
     }
   }
 
@@ -105,7 +105,7 @@ export default async function Home({
   const isLocalhost = APP_BASE_URL.includes("localhost")
   return (
     <>
-      {/* These elements will generate the Frame meta-tags */}
+      {/* These elements will generate the Frame <meta> tags */}
       <FrameContainer
         pathname={`${listingUrl}`}
         postUrl={`${listingUrl}/frames`}
