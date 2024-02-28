@@ -5,9 +5,7 @@ import { APP_BASE_URL } from "./constants"
 import { useState } from "react"
 
 // Defaulting to our example listing for the tutorial
-// TODO: Replace with the definitive tutorial gift listing
-const DEFAULT_LISTING_ID = "bb736890-cba9-4c91-a580-8221965394e9"
-// const DEFAULT_LISTING_ID = "a414b244-9174-4ab5-9ac5-f366b9d48307"
+const DEFAULT_LISTING_ID = "f1ac0957-4ce4-4c24-9609-4934b84cb9ce"
 
 
 export default function Home() {

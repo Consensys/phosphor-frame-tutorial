@@ -1,5 +1,7 @@
 # Phosphor API x Farcaster Frames
 
+Companion repo for the tutorial article [How to Create NFT Farcaster Frames Using Phosphor APIs](https://paragraph.xyz/@phosphor/create-nft-farcaster-frames-with-phosphor-api)
+
 Based on the [Frames.js Starter Kit](https://github.com/framesjs/frames.js/tree/main/examples/framesjs-starter), a repo to get started quickly with `frames.js`.
 
 ## Requisites
